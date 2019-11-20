@@ -28,7 +28,7 @@ ztl() {
   if echo ${CMD} | grep "sshpass" > /dev/null; then
     CMD+=" -o ConnectTimeout=5"
     TMP_LOGFILE=$(date +${4%%.*}_%Y-%m-%d_%H-%M-%S.log)
-  elif echo ${CMD} | grep "ssh -o StrictHostKeyChecking=no" > /dev/null; then 
+  elif echo ${CMD} | grep "sshrc -o StrictHostKeyChecking=no" > /dev/null; then 
     CMD+=" -o ConnectTimeout=5"
     TMP_LOGFILE=$(date +${4%%.*}_%Y-%m-%d_%H-%M-%S.log)
   elif echo ${CMD} | grep "ssh" > /dev/null; then 
