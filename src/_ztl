@@ -23,13 +23,17 @@ ztl() {
 
   local CMD=${@}
   local TMP_LOGFILE=""
+  local PRE_LOGFILE=${CMD}
 
   if echo ${CMD} | grep "sshpass" > /dev/null; then
     CMD+=" -o ConnectTimeout=5"
-    TMP_LOGFILE=$(date +${4}_%Y-%m-%d_%H-%M-%S.log)
+    TMP_LOGFILE=$(date +${4%%.*}_%Y-%m-%d_%H-%M-%S.log)
+  elif echo ${CMD} | grep "ssh -o StrictHostKeyChecking=no" > /dev/null; then 
+    CMD+=" -o ConnectTimeout=5"
+    TMP_LOGFILE=$(date +${4%%.*}_%Y-%m-%d_%H-%M-%S.log)
   elif echo ${CMD} | grep "ssh" > /dev/null; then 
     CMD+=" -o ConnectTimeout=5"
-    TMP_LOGFILE=$(date +${2}_%Y-%m-%d_%H-%M-%S.log)
+    TMP_LOGFILE=$(date +${2%%.*}_%Y-%m-%d_%H-%M-%S.log)
   fi
 
   local ZTL_LOGDIR=${HOME}/term_logs
